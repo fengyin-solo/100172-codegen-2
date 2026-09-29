@@ -244,3 +244,15 @@ class SettleEntry(BaseModel):
     field_5: str | None = None  # 审核人员
     field_6: str | None = None  # 付款日期
     field_7: str | None = None  # 结算状态
+
+class WorkpermitEntry(BaseModel):
+    """作业票明细结构。"""
+
+    field_0: str | None = None  # 作业票编号
+    field_1: str | None = None  # 作业名称
+    field_2: str | None = None  # 风险等级
+    field_3: str | None = None  # 作业区域
+    field_4: str | None = None  # 监护人员
+    field_5: str | None = None  # 作业内容
+    field_6: str | None = None  # 计划开工日期
+    field_7: str | None = None  # 作业状态

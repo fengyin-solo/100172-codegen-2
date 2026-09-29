@@ -37,11 +37,18 @@ class Store:
                 "pending": sum(1 for row in rows if row.get("pending")),
                 "abnormal": sum(1 for row in rows if row.get("abnormal")),
             })
+        # 作业票看板：在施工作业数 = 状态为「施工中」的作业票数量，随状态流转实时增减。
+        in_construction = 0
+        if "workpermit" in self._tables:
+            in_construction = sum(
+                1 for row in self.rows("workpermit") if row.get("status") == "施工中"
+            )
         cards = [
             {"label": "业务模块", "value": len(modules)},
             {"label": "今日新增", "value": sum(int(item["created"]) for item in modules)},
             {"label": "待处理", "value": sum(int(item["pending"]) for item in modules)},
             {"label": "异常量", "value": sum(int(item["abnormal"]) for item in modules)},
+            {"label": "在施工作业", "value": in_construction},
         ]
         return {"cards": cards, "modules": modules}
 
